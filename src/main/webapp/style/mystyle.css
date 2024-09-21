@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+body{
+	text-align: center;
+	margin: auto;
+}
+
+h1{
+	color: #CFBDAD ;
+}
+
+h2{
+	font-size: 1.2em;
+}
