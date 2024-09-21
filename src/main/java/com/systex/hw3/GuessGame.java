@@ -28,4 +28,9 @@ public class GuessGame {
 	public int getRange() {
 		return range;
 	}
+
+	public int getLuckyNumber() {
+		return luckyNumber;
+	}
+	
 }

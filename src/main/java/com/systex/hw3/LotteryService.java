@@ -2,7 +2,10 @@ package com.systex.hw3;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 public class LotteryService {
@@ -38,21 +41,26 @@ public class LotteryService {
 		this.result = result;
 	}
 
-	public ArrayList<LinkedList<String>> getNumbers(int groups,LinkedList<String> excludes) {
-		ArrayList<LinkedList<String>> totallotteryNum = new ArrayList<>();
-		
-		for(int i = 0 ; i< groups ; i++) {
-			LinkedList<String> lotteryNum = new LinkedList<>();
-			while (lotteryNum.size() < 6) {
-				int num = (int) (Math.random() * 49) + 1;
-				if (!excludes.contains(Integer.toString(num)) &&!lotteryNum.contains(Integer.toString(num))) {
-	                lotteryNum.add(Integer.toString(num));
-	            }
-			}
-			Collections.sort(lotteryNum);
-			totallotteryNum.add(lotteryNum);
-		}
-		return totallotteryNum;
+	public ArrayList<LinkedList<Integer>> getNumbers(int groups, LinkedList<String> excludes) {
+	    ArrayList<LinkedList<Integer>> totalLotteryNum = new ArrayList<>();
+	    
+	    // 将 excludes 转换为 Integer 类型以便进行比较
+	    Set<Integer> excludeSet = new HashSet<>();
+	    for (String exc : excludes) {
+	        excludeSet.add(Integer.parseInt(exc));
+	    }
 
+	    for (int i = 0; i < groups; i++) {
+	        LinkedList<Integer> lotteryNum = new LinkedList<>();
+	        while (lotteryNum.size() < 6) {
+	            int num = (int) (Math.random() * 49) + 1;
+	            if (!excludeSet.contains(num) && !lotteryNum.contains(num)) {
+	                lotteryNum.add(num);
+	            }
+	        }
+	        Collections.sort(lotteryNum);
+	        totalLotteryNum.add(lotteryNum);
+	    }
+	    return totalLotteryNum;
 	}
 }

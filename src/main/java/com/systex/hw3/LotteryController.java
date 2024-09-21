@@ -43,9 +43,7 @@ public class LotteryController extends HttpServlet {
 		if(group != null && !isInteger(group)) {
 			errorMsgs.add("組數位必須是整數");
         }
-		if(exclude == null || exclude.trim().isEmpty()) {
-			exclude = " ";
-		}
+
 		if(!errorMsgs.isEmpty()) {
 			view = request.getRequestDispatcher("main.jsp");
 			view.forward(request, response);
@@ -57,15 +55,13 @@ public class LotteryController extends HttpServlet {
 		String[]arrayExclude = exclude.split(" ");
 		LinkedList<String> linkedExclude = new LinkedList<>(Arrays.asList(arrayExclude));
 
-				
+		ArrayList<LinkedList<Integer>> resultArray;
 		try {
 			LotteryService lot = new LotteryService();
 			lot.setGroup(groupNum);
 			lot.setExclude(exclude);
-			ArrayList<LinkedList<String>> resultArray = lot.getNumbers(groupNum,linkedExclude);
-			
-			lot.setResult(resultArray);
-			
+			resultArray = lot.getNumbers(groupNum, linkedExclude);
+			request.setAttribute("resultArray", resultArray);
 			request.setAttribute("lot", lot);
 			
 			view = request.getRequestDispatcher("result.jsp");

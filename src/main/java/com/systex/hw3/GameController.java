@@ -2,6 +2,7 @@ package com.systex.hw3;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,7 +34,7 @@ public class GameController extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		
-		GuessGame game = new GuessGame(10, 3);
+		GuessGame game = new GuessGame(10 , 3);
 		HttpSession session = request.getSession();
 	    session.setAttribute("game", game);
 	    response.sendRedirect("guess.jsp");
@@ -76,10 +77,12 @@ public class GameController extends HttpServlet {
 		HttpSession session = request.getSession();
 		GuessGame game = (GuessGame) session.getAttribute("game");
 		boolean success = game.guess(number);
+		int luckyNum = game.getLuckyNumber();
+		request.setAttribute("luckynum", luckyNum);
 		
 		if (success) {
             session.invalidate();
-            response.sendRedirect("youWin.jsp");
+            request.getRequestDispatcher("youWin.jsp").forward(request, response);
         } else if (game.getRemains() > 0) {
             request.setAttribute("remain", game.getRemains());
             request.getRequestDispatcher("guess.jsp").forward(request, response);

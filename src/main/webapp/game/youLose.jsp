@@ -9,8 +9,9 @@
 </head>
 <body>
 	<h1>Guess Game</h1>
-	<h2>很抱歉，你輸了，沒猜對...</h2>
-	<img src="https://i.imgur.com/zYqWVlN.jpeg" width="30%" height="30%"/>
+	<h2>很抱歉，你沒猜對...</h2>
+	<h2>數字是 <%=request.getAttribute("luckynum") %></h2>
+	<img src="https://i.imgur.com/zYqWVlN.jpeg" width="15%" height="15%"/>
 	<p><a href="../">回首頁</a><p>
 </body>
 </html>
