@@ -10,6 +10,9 @@
 </head>
 <body>
 	<h1>Lottery</h1>
+	<p style="font-size:14px;">請輸入要跑出的組數及要排除的數字，</p>
+	<p style="font-size:14px;">若沒輸入要排除的數字則預設為沒有要排除的數字跑出結果。</p>
+	<br/>
 	<%-- Error Report --%>
 	<% LinkedList<String> errors = (LinkedList<String>)request.getAttribute("errors"); %>
 	<% if(errors != null){ %>
@@ -27,11 +30,11 @@
 		<table border="0" style="margin:auto; text-align:left;">
 			<tbody>
 				<tr>
-					<td>組數</td><td><input type="text" name="group"/></td>
+					<td>組數</td><td><input type="text" name="group" value="${param.group}"/></td>
 				</tr>
 				<tr><td></td></tr><tr><td></td></tr>
 				<tr>
-					<td>排除</td><td><input type="text" name="exclude"/></td>
+					<td>排除</td><td><input type="text" name="exclude" value="${param.exclude}"/></td>
 				</tr>
 				<tr><td></td></tr><tr><td></td></tr>
 				<tr>
